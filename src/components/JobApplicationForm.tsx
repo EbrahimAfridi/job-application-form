@@ -5,13 +5,13 @@ import {
   useFormContext,
 } from "../context/FormContext";
 
-import PersonalInfoStep from "./steps/PersonalInfoStep";
-import ProfessionalInfoStep from "./steps/ProfessionalInfoStep";
-import DocumentsStep from "./steps/DocumentsStep";
-import AdditionalInfoStep from "./steps/AdditionalInfoStep";
-import ReviewStep from "./steps/ReviewStep";
-import FormStepper from "./components/FormStepper";
-import DraftBanner from "./components/DraftBanner";
+import PersonalInfoStep from "./steps";
+import ProfessionalInfoStep from "./steps";
+import DocumentsStep from "./steps";
+import AdditionalInfoStep from "./steps";
+import ReviewStep from "./steps";
+import FormStepper from "./FormStepper";
+import DraftBanner from "./DraftBanner";
 
 const JobApplicationForm: React.FC = () => {
   const {
