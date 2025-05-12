@@ -60,7 +60,7 @@ export const applicationFormSchema = z.object({
           position: z.string().min(1, "Position is required"),
           startDate: z.date(),
           endDate: z.date().nullable().optional(),
-          current: z.boolean().default(false),
+          current: z.boolean().default(false).optional(),
           description: z
             .string()
             .min(1, "Please describe your responsibilities"),
