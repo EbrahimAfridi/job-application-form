@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { useFormContext as useCustomFormContext } from "../context/FormContext";
-import { type ApplicationFormData } from "../schema";
+import { useFormContext as useCustomFormContext } from "../../context/FormContext";
+import { type ApplicationFormData } from "../../schema";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -146,9 +146,9 @@ const PersonalInfoStep: React.FC = () => {
             {errors.personalInfo.phone.message}
           </p>
         )}
-        <p className="mt-1 text-xs text-gray-500">
+        {/* <p className="mt-1 text-xs text-gray-500">
           Please include country code
-        </p>
+        </p> */}
       </div>
 
       {/* Username with availability check */}
@@ -207,10 +207,10 @@ const PersonalInfoStep: React.FC = () => {
           </p>
         )}
 
-        <p className="mt-1 text-xs text-gray-500">
+        {/* <p className="mt-1 text-xs text-gray-500">
           Username must be at least 3 characters and can only contain letters,
           numbers, and underscores
-        </p>
+        </p> */}
       </div>
 
       {/* Date of Birth with DatePicker */}

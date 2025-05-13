@@ -1,7 +1,7 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
-import { useFormContext as useCustomFormContext } from "../context/FormContext";
-import { type ApplicationFormData } from "../schema";
+import { useFormContext as useCustomFormContext } from "../../context/FormContext";
+import { type ApplicationFormData } from "../../schema";
 
 const ReviewStep: React.FC = () => {
   const {
@@ -128,14 +128,16 @@ const ReviewStep: React.FC = () => {
             <div>
               <p className="text-sm font-medium text-gray-500">Skills</p>
               <div className="mt-1 flex flex-wrap gap-2">
-                {formData.professionalInfo?.skills.map((skill, index) => (
-                  <span
-                    key={index}
-                    className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
-                  >
-                    {skill}
-                  </span>
-                ))}
+                {formData.professionalInfo?.skills.map(
+                  (skill: any, index: number) => (
+                    <span
+                      key={index}
+                      className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
+                    >
+                      {skill}
+                    </span>
+                  )
+                )}
               </div>
             </div>
 
@@ -145,7 +147,7 @@ const ReviewStep: React.FC = () => {
               </p>
               <div className="mt-2 space-y-3">
                 {formData.professionalInfo?.experiences.map(
-                  (experience, index) => (
+                  (experience: any, index: number) => (
                     <div
                       key={index}
                       className="border-l-2 border-gray-200 pl-3 py-1"

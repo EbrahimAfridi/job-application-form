@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useDropzone } from "react-dropzone";
-import { type ApplicationFormData } from "../schema";
+import { type ApplicationFormData } from "../../schema";
 
 // File type helpers
 const ACCEPTED_IMAGE_TYPES = [

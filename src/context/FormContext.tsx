@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   applicationFormSchema,
@@ -39,7 +39,7 @@ type FormContextType = {
 const FormContext = createContext<FormContextType | null>(null);
 
 // Provider component
-export const FormProvider: React.FC<{ children: React.ReactNode }> = ({
+export const FormContextProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [currentStep, setCurrentStep] = useState(0);

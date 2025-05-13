@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
 import {
-  FormProvider as CustomFormProvider,
+  FormContextProvider as CustomFormProvider,
   formSteps,
   useFormContext,
 } from "../context/FormContext";
 
-import PersonalInfoStep from "./steps";
-import ProfessionalInfoStep from "./steps";
-import DocumentsStep from "./steps";
-import AdditionalInfoStep from "./steps";
-import ReviewStep from "./steps";
+// Import step components properly
+import {
+  PersonalInfoStep,
+  ProfessionalInfoStep,
+  DocumentsStep,
+  AdditionalInfoStep,
+  ReviewStep,
+} from "./steps/index";
+
 import FormStepper from "./FormStepper";
 import DraftBanner from "./DraftBanner";
 
