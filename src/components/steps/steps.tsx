@@ -42,7 +42,6 @@ const FileDropzone: React.FC<FileDropzoneProps> = ({
   acceptedTypes,
   maxSize,
   required = false,
-  multiple = false,
 }) => {
   const {
     setValue,
