@@ -46,7 +46,7 @@ export const applicationFormSchema = z.object({
       state: z.string().min(1, "State is required"),
       zip: z
         .string()
-        .regex(/^\d{5}(-\d{4})?$/, "Please enter a valid ZIP code"),
+        .regex(/^\d{5}(-\d{4})?$|^\d{6}$/, "Please enter a valid ZIP code"),
       country: z.string().min(1, "Country is required"),
     }),
   }),
@@ -85,19 +85,26 @@ export const applicationFormSchema = z.object({
   // Step 3: Document Uploads
   documents: z.object({
     resume: z
-      .instanceof(File)
+      .union([
+        z.instanceof(File),
+        z.null(),
+        z.undefined(),
+      ])
       .refine(
-        (file) => file.size <= MAX_FILE_SIZE,
+        (file) => !file || file.size <= MAX_FILE_SIZE,
         "File size must be less than 5MB"
       )
       .refine(
-        (file) => ACCEPTED_FILE_TYPES.includes(file.type),
+        (file) => !file || ACCEPTED_FILE_TYPES.includes(file.type),
         "Only PDF, DOC, or DOCX files are accepted"
       ),
 
     profilePicture: z
-      .instanceof(File)
-      .optional()
+      .union([
+        z.instanceof(File),
+        z.null(),
+        z.undefined(),
+      ])
       .refine(
         (file) => !file || file.size <= MAX_FILE_SIZE,
         "Image size must be less than 5MB"
@@ -108,8 +115,11 @@ export const applicationFormSchema = z.object({
       ),
 
     coverLetter: z
-      .instanceof(File)
-      .optional()
+      .union([
+        z.instanceof(File),
+        z.null(),
+        z.undefined(),
+      ])
       .refine(
         (file) => !file || file.size <= MAX_FILE_SIZE,
         "File size must be less than 5MB"

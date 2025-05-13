@@ -16,6 +16,8 @@ import {
 
 import FormStepper from "./FormStepper";
 import DraftBanner from "./DraftBanner";
+import { Button } from "./ui/button";
+import { Save } from "lucide-react";
 
 const JobApplicationForm: React.FC = () => {
   const {
@@ -100,44 +102,45 @@ const JobApplicationForm: React.FC = () => {
 
       <div className="mt-8">{renderStep()}</div>
 
-      <div className="mt-8 flex justify-between">
+      <div className={`mt-8 flex justify-${isFirstStep ? `end` : `between`}`}>
         {!isFirstStep && (
-          <button
+          <Button
             type="button"
             onClick={prevStep}
-            className="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400 transition-colors"
+            className="bg-gray-300 rounded text-gray-800 hover:bg-gray-400 transition-colors"
           >
             Previous
-          </button>
+          </Button>
         )}
 
         {!isLastStep ? (
-          <button
-            type="button"
-            onClick={nextStep}
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors ml-auto"
-          >
-            Next
-          </button>
+          <div className="flex items-center gap-4">
+            <Button
+              variant={"ghost"}
+              type="button"
+              onClick={saveDraft}
+              className="text-blue-600 hover:underline hover:text-blue-800 transition-colors"
+            >
+              <Save />
+              Save Draft
+            </Button>
+            <Button
+              type="button"
+              onClick={nextStep}
+              className="bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors ml-auto"
+            >
+              Next
+            </Button>
+          </div>
         ) : (
-          <button
+          <Button
             type="submit"
             form="job-application-form"
             className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors ml-auto"
           >
             Submit Application
-          </button>
+          </Button>
         )}
-      </div>
-
-      <div className="mt-4 text-right">
-        <button
-          type="button"
-          onClick={saveDraft}
-          className="text-blue-600 hover:underline"
-        >
-          Save as Draft
-        </button>
       </div>
     </div>
   );

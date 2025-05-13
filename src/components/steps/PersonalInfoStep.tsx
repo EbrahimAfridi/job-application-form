@@ -4,6 +4,17 @@ import { useFormContext as useCustomFormContext } from "../../context/FormContex
 import { type ApplicationFormData } from "../../schema";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { Button } from "../ui/button";
+import { CalendarDays } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
 const PersonalInfoStep: React.FC = () => {
   const {
@@ -52,12 +63,11 @@ const PersonalInfoStep: React.FC = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* First Name */}
-        <div className="form-control">
-          <label className="label" htmlFor="firstName">
-            <span className="label-text font-medium">First Name</span>
-            <span className="label-text-alt text-red-500">*</span>
-          </label>
-          <input
+        <div className="grid w-full max-w-sm items-center gap-1.5">
+          <Label htmlFor="firstName" className="gap-0.5">
+            First Name <span className="label-text-alt text-red-500">*</span>
+          </Label>
+          <Input
             id="firstName"
             type="text"
             className={`input input-bordered w-full ${
@@ -76,12 +86,12 @@ const PersonalInfoStep: React.FC = () => {
         </div>
 
         {/* Last Name */}
-        <div className="form-control">
-          <label className="label" htmlFor="lastName">
-            <span className="label-text font-medium">Last Name</span>
+        <div className="grid w-full max-w-sm items-center gap-1.5">
+          <Label className="label gap-0.5" htmlFor="lastName">
+            Last Name
             <span className="label-text-alt text-red-500">*</span>
-          </label>
-          <input
+          </Label>
+          <Input
             id="lastName"
             type="text"
             className={`input input-bordered w-full ${
@@ -101,12 +111,12 @@ const PersonalInfoStep: React.FC = () => {
       </div>
 
       {/* Email */}
-      <div className="form-control">
-        <label className="label" htmlFor="email">
-          <span className="label-text font-medium">Email</span>
+      <div className="grid w-full max-w-sm items-center gap-1.5">
+        <Label className="gap-0.5 label" htmlFor="email">
+          Email
           <span className="label-text-alt text-red-500">*</span>
-        </label>
-        <input
+        </Label>
+        <Input
           id="email"
           type="email"
           className={`input input-bordered w-full ${
@@ -125,12 +135,12 @@ const PersonalInfoStep: React.FC = () => {
       </div>
 
       {/* Phone */}
-      <div className="form-control">
-        <label className="label" htmlFor="phone">
-          <span className="label-text font-medium">Phone Number</span>
+      <div className="grid w-full max-w-sm items-center gap-1.5">
+        <Label className="gap-0.5 label" htmlFor="phone">
+          Phone
           <span className="label-text-alt text-red-500">*</span>
-        </label>
-        <input
+        </Label>
+        <Input
           id="phone"
           type="tel"
           className={`input input-bordered w-full ${
@@ -146,20 +156,20 @@ const PersonalInfoStep: React.FC = () => {
             {errors.personalInfo.phone.message}
           </p>
         )}
-        {/* <p className="mt-1 text-xs text-gray-500">
+        <p className="mt-1 text-xs text-gray-500">
           Please include country code
-        </p> */}
+        </p>
       </div>
 
       {/* Username with availability check */}
-      <div className="form-control">
-        <label className="label" htmlFor="username">
-          <span className="label-text font-medium">Username</span>
+      <div className="grid w-full max-w-sm items-center gap-1.5">
+        <Label className="gap-0.5 label" htmlFor="username">
+          Username
           <span className="label-text-alt text-red-500">*</span>
-        </label>
+        </Label>
         <div className="flex gap-2">
           <div className="relative flex-grow">
-            <input
+            <Input
               id="username"
               type="text"
               className={`input input-bordered w-full ${
@@ -186,7 +196,8 @@ const PersonalInfoStep: React.FC = () => {
             )}
           </div>
 
-          <button
+          <Button
+            variant={"secondary"}
             type="button"
             onClick={handleUsernameCheck}
             disabled={
@@ -195,10 +206,9 @@ const PersonalInfoStep: React.FC = () => {
               username.length < 3 ||
               !!errors.personalInfo?.username
             }
-            className="btn btn-outline"
           >
             {isCheckingUsername ? "Checking..." : "Check Availability"}
-          </button>
+          </Button>
         </div>
 
         {errors.personalInfo?.username && (
@@ -207,31 +217,39 @@ const PersonalInfoStep: React.FC = () => {
           </p>
         )}
 
-        {/* <p className="mt-1 text-xs text-gray-500">
+        <p className="mt-1 text-xs text-gray-500">
           Username must be at least 3 characters and can only contain letters,
           numbers, and underscores
-        </p> */}
+        </p>
       </div>
 
       {/* Date of Birth with DatePicker */}
-      <div className="form-control">
-        <label className="label" htmlFor="dateOfBirth">
-          <span className="label-text font-medium">Date of Birth</span>
+      <div className="grid items-center gap-1.5">
+        <Label className="gap-0.5 label" htmlFor="dateOfBirth">
+          Birthdate
           <span className="label-text-alt text-red-500">*</span>
-        </label>
-        <DatePicker
-          id="dateOfBirth"
-          selected={watch("personalInfo.dateOfBirth")}
-          onChange={handleDateOfBirthChange}
-          className={`input input-bordered w-full ${
-            errors.personalInfo?.dateOfBirth ? "border-red-500" : ""
-          }`}
-          placeholderText="Select your date of birth"
-          maxDate={new Date()}
-          showYearDropdown
-          dropdownMode="select"
-          dateFormat="MMMM d, yyyy"
-        />
+        </Label>
+        <div className="relative">
+          <DatePicker
+            id="dateOfBirth"
+            selected={watch("personalInfo.dateOfBirth")}
+            onChange={handleDateOfBirthChange}
+            className={`w-[200px] pl-8 h-[36px] cursor-pointer bg-white border border-gray-300 text-xs font-medium 
+               text-gray-950 rounded-md ${
+                 errors.personalInfo?.dateOfBirth ? "border-red-500" : ""
+               }`}
+            placeholderText="Select your date of birth"
+            maxDate={new Date()}
+            showYearDropdown
+            dropdownMode="select"
+            dateFormat="MMMM d, yyyy"
+            calendarClassName="!z-50"
+          />
+          {/* Calendar icon */}
+          <span className="absolute left-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+            <CalendarDays size={18} />
+          </span>
+        </div>
         {errors.personalInfo?.dateOfBirth && (
           <p id="dateOfBirth-error" className="mt-1 text-xs text-red-500">
             {errors.personalInfo.dateOfBirth.message}
@@ -244,12 +262,12 @@ const PersonalInfoStep: React.FC = () => {
         <h3 className="text-lg font-medium mb-4">Address Information</h3>
 
         {/* Street */}
-        <div className="form-control">
-          <label className="label" htmlFor="street">
-            <span className="label-text font-medium">Street Address</span>
+        <div className="grid w-full max-w-sm items-center gap-1.5">
+          <Label className="gap-0.5 label" htmlFor="street">
+            Street
             <span className="label-text-alt text-red-500">*</span>
-          </label>
-          <input
+          </Label>
+          <Input
             id="street"
             type="text"
             className={`input input-bordered w-full ${
@@ -267,58 +285,62 @@ const PersonalInfoStep: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
           {/* City */}
-          <div className="form-control">
-            <label className="label" htmlFor="city">
-              <span className="label-text font-medium">City</span>
+          <div className="flex flex-col w-full max-w-sm gap-1.5">
+            <Label className="gap-0.5 label" htmlFor="city">
+              City
               <span className="label-text-alt text-red-500">*</span>
-            </label>
-            <input
+            </Label>
+            <Input
               id="city"
               type="text"
               className={`input input-bordered w-full ${
-                errors.personalInfo?.address?.city ? "border-red-500" : ""
+          errors.personalInfo?.address?.city ? "border-red-500" : ""
               }`}
               placeholder="Anytown"
               {...register("personalInfo.address.city")}
             />
-            {errors.personalInfo?.address?.city && (
-              <p className="mt-1 text-xs text-red-500">
-                {errors.personalInfo.address.city.message}
-              </p>
-            )}
+            <div style={{ minHeight: "20px" }}>
+              {errors.personalInfo?.address?.city && (
+          <p className="mt-1 text-xs text-red-500">
+            {errors.personalInfo.address.city.message}
+          </p>
+              )}
+            </div>
           </div>
 
-          {/* State */}
-          <div className="form-control">
-            <label className="label" htmlFor="state">
-              <span className="label-text font-medium">State/Province</span>
+          {/* State/Province */}
+          <div className="flex flex-col w-full max-w-sm gap-1.5">
+            <Label className="gap-0.5 label" htmlFor="state">
+              State / Province
               <span className="label-text-alt text-red-500">*</span>
-            </label>
-            <input
+            </Label>
+            <Input
               id="state"
               type="text"
               className={`input input-bordered w-full ${
-                errors.personalInfo?.address?.state ? "border-red-500" : ""
+          errors.personalInfo?.address?.state ? "border-red-500" : ""
               }`}
               placeholder="CA"
               {...register("personalInfo.address.state")}
             />
-            {errors.personalInfo?.address?.state && (
-              <p className="mt-1 text-xs text-red-500">
-                {errors.personalInfo.address.state.message}
-              </p>
-            )}
+            <div style={{ minHeight: "20px" }}>
+              {errors.personalInfo?.address?.state && (
+          <p className="mt-1 text-xs text-red-500">
+            {errors.personalInfo.address.state.message}
+          </p>
+              )}
+            </div>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
           {/* Zip */}
-          <div className="form-control">
-            <label className="label" htmlFor="zip">
-              <span className="label-text font-medium">ZIP/Postal Code</span>
+          <div className="flex flex-col w-full max-w-sm gap-1.5">
+            <Label className="gap-0.5 label" htmlFor="zip">
+              Pin Code
               <span className="label-text-alt text-red-500">*</span>
-            </label>
-            <input
+            </Label>
+            <Input
               id="zip"
               type="text"
               className={`input input-bordered w-full ${
@@ -327,39 +349,56 @@ const PersonalInfoStep: React.FC = () => {
               placeholder="12345"
               {...register("personalInfo.address.zip")}
             />
-            {errors.personalInfo?.address?.zip && (
-              <p className="mt-1 text-xs text-red-500">
-                {errors.personalInfo.address.zip.message}
-              </p>
-            )}
+            <div style={{ minHeight: "20px" }}>
+              {errors.personalInfo?.address?.zip && (
+                <p className="mt-1 text-xs text-red-500">
+                  {errors.personalInfo.address.zip.message}
+                </p>
+              )}
+            </div>
           </div>
 
           {/* Country */}
-          <div className="form-control">
-            <label className="label" htmlFor="country">
-              <span className="label-text font-medium">Country</span>
+          <div className="flex flex-col w-full max-w-sm gap-1.5">
+            <Label htmlFor="country" className="gap-0.5">
+              Country
               <span className="label-text-alt text-red-500">*</span>
-            </label>
-            <select
-              id="country"
-              className={`select select-bordered w-full ${
-                errors.personalInfo?.address?.country ? "border-red-500" : ""
-              }`}
-              {...register("personalInfo.address.country")}
+            </Label>
+            <Select
+              value={watch("personalInfo.address.country") || ""}
+              onValueChange={(value) =>
+                setValue("personalInfo.address.country", value, {
+                  shouldValidate: true,
+                })
+              }
             >
-              <option value="">Select a country</option>
-              <option value="US">United States</option>
-              <option value="CA">Canada</option>
-              <option value="UK">United Kingdom</option>
-              <option value="AU">Australia</option>
-              <option value="IN">India</option>
-              {/* Add more countries as needed */}
-            </select>
-            {errors.personalInfo?.address?.country && (
-              <p className="mt-1 text-xs text-red-500">
-                {errors.personalInfo.address.country.message}
-              </p>
-            )}
+              <SelectTrigger
+                id="country"
+                className={`w-full ${
+                  errors.personalInfo?.address?.country ? "border-red-500" : ""
+                }`}
+                aria-invalid={
+                  errors.personalInfo?.address?.country ? "true" : "false"
+                }
+                aria-describedby="country-error"
+              >
+                <SelectValue placeholder="Select a country" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="India">India</SelectItem>
+                <SelectItem value="United States">United States</SelectItem>
+                <SelectItem value="Canada">Canada</SelectItem>
+                <SelectItem value="Australia">Australia</SelectItem>
+                <SelectItem value="United Kingdom">United Kingdom</SelectItem>
+              </SelectContent>
+            </Select>
+            <div style={{ minHeight: "20px" }}>
+              {errors.personalInfo?.address?.country && (
+                <p id="country-error" className="mt-1 text-xs text-red-500">
+                  {errors.personalInfo.address.country.message}
+                </p>
+              )}
+            </div>
           </div>
         </div>
       </div>

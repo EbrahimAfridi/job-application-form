@@ -1,6 +1,10 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
 import { type ApplicationFormData } from "../../schema";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
+import { Button } from "../ui/button";
 
 const ProfessionalInfoStep: React.FC = () => {
   const {
@@ -135,12 +139,12 @@ const ProfessionalInfoStep: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Company */}
-              <div className="form-control">
-                <label className="label" htmlFor={`company-${index}`}>
-                  <span className="label-text font-medium">Company</span>
+              <div className="grid w-full max-w-sm items-center gap-1.5">
+                <Label htmlFor={`company-${index}`}>
+                  Company
                   <span className="label-text-alt text-red-500">*</span>
-                </label>
-                <input
+                </Label>
+                <Input
                   id={`company-${index}`}
                   type="text"
                   className={`input input-bordered w-full ${
@@ -164,12 +168,12 @@ const ProfessionalInfoStep: React.FC = () => {
               </div>
 
               {/* Position */}
-              <div className="form-control">
-                <label className="label" htmlFor={`position-${index}`}>
-                  <span className="label-text font-medium">Position</span>
+              <div className="grid w-full max-w-sm items-center gap-1.5">
+                <Label htmlFor={`position-${index}`}>
+                  Position
                   <span className="label-text-alt text-red-500">*</span>
-                </label>
-                <input
+                </Label>
+                <Input
                   id={`position-${index}`}
                   type="text"
                   className={`input input-bordered w-full ${
@@ -194,32 +198,32 @@ const ProfessionalInfoStep: React.FC = () => {
             </div>
 
             <div className="flex items-center mb-4">
-              <input
+              <Input
                 type="checkbox"
                 id={`current-job-${index}`}
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                 checked={experience.current || false}
                 onChange={(e) => handleCurrentChange(index, e.target.checked)}
               />
-              <label
+              <Label
                 htmlFor={`current-job-${index}`}
                 className="ml-2 block text-sm text-gray-900"
               >
                 I currently work here
-              </label>
+              </Label>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Start Date */}
-              <div className="form-control">
-                <label className="label" htmlFor={`start-date-${index}`}>
-                  <span className="label-text font-medium">Start Date</span>
+              <div className="grid w-full max-w-sm items-center gap-1.5">
+                <Label className="label" htmlFor={`start-date-${index}`}>
+                  Start Date
                   <span className="label-text-alt text-red-500">*</span>
-                </label>
-                <input
+                </Label>
+                <Input
                   id={`start-date-${index}`}
                   type="date"
-                  className={`input input-bordered w-full ${
+                  className={`input input-bordered w-fit ${
                     errors.professionalInfo?.experiences?.[index]?.startDate
                       ? "border-red-500"
                       : ""
@@ -251,15 +255,15 @@ const ProfessionalInfoStep: React.FC = () => {
 
               {/* End Date - hidden if current job */}
               {!experience.current && (
-                <div className="form-control">
-                  <label className="label" htmlFor={`end-date-${index}`}>
-                    <span className="label-text font-medium">End Date</span>
+                <div className="grid w-full max-w-sm items-center gap-1.5">
+                  <Label className="label" htmlFor={`end-date-${index}`}>
+                    End Date
                     <span className="label-text-alt text-red-500">*</span>
-                  </label>
-                  <input
+                  </Label>
+                  <Input
                     id={`end-date-${index}`}
                     type="date"
-                    className={`input input-bordered w-full ${
+                    className={`input input-bordered w-fit ${
                       errors.professionalInfo?.experiences?.[index]?.endDate
                         ? "border-red-500"
                         : ""
@@ -292,14 +296,14 @@ const ProfessionalInfoStep: React.FC = () => {
             </div>
 
             {/* Description */}
-            <div className="form-control">
-              <label className="label" htmlFor={`description-${index}`}>
+            <div className="grid w-full items-center gap-1.5">
+              <Label className="label" htmlFor={`description-${index}`}>
                 <span className="label-text font-medium">
                   Responsibilities & Achievements
                 </span>
                 <span className="label-text-alt text-red-500">*</span>
-              </label>
-              <textarea
+              </Label>
+              <Textarea
                 id={`description-${index}`}
                 className={`textarea textarea-bordered w-full h-24 ${
                   errors.professionalInfo?.experiences?.[index]?.description
@@ -323,10 +327,11 @@ const ProfessionalInfoStep: React.FC = () => {
           </div>
         ))}
 
-        <button
+        <Button
+          variant="outline"
           type="button"
           onClick={addExperience}
-          className="btn btn-outline btn-sm mt-2"
+          className="mt-2"
         >
           <svg
             className="h-5 w-5 mr-1"
@@ -342,7 +347,7 @@ const ProfessionalInfoStep: React.FC = () => {
             />
           </svg>
           Add Another Experience
-        </button>
+        </Button>
       </div>
 
       {/* Skills Section */}
@@ -351,9 +356,9 @@ const ProfessionalInfoStep: React.FC = () => {
 
         <div className="space-y-4">
           {skills.map((_: any, index: number) => (
-            <div key={index} className="flex items-center gap-2">
+            <div key={index} className="flex items-start gap-2">
               <div className="flex-grow">
-                <input
+                <Input
                   type="text"
                   className={`input input-bordered w-full ${
                     errors.professionalInfo?.skills?.[index]
@@ -370,10 +375,11 @@ const ProfessionalInfoStep: React.FC = () => {
                 )}
               </div>
               {skills.length > 1 && (
-                <button
+                <Button
+                  variant="outline"
                   type="button"
                   onClick={() => removeSkill(index)}
-                  className="text-red-500 hover:text-red-700"
+                  className="text-red-500 hover:text-red-700 hover:cursor-pointer"
                 >
                   <svg
                     className="h-5 w-5"
@@ -388,16 +394,12 @@ const ProfessionalInfoStep: React.FC = () => {
                       d="M6 18L18 6M6 6l12 12"
                     />
                   </svg>
-                </button>
+                </Button>
               )}
             </div>
           ))}
 
-          <button
-            type="button"
-            onClick={addSkill}
-            className="btn btn-outline btn-sm"
-          >
+          <Button variant="outline" type="button" onClick={addSkill}>
             <svg
               className="h-5 w-5 mr-1"
               fill="none"
@@ -412,7 +414,7 @@ const ProfessionalInfoStep: React.FC = () => {
               />
             </svg>
             Add Skill
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -421,14 +423,12 @@ const ProfessionalInfoStep: React.FC = () => {
         <h3 className="text-lg font-medium mb-4">Experience & Expectations</h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="form-control">
-            <label className="label" htmlFor="yearsOfExperience">
-              <span className="label-text font-medium">
-                Years of Professional Experience
-              </span>
+          <div className="grid w-full max-w-sm items-center gap-1.5">
+            <Label className="label" htmlFor="yearsOfExperience">
+              Years of Professional Experience
               <span className="label-text-alt text-red-500">*</span>
-            </label>
-            <input
+            </Label>
+            <Input
               id="yearsOfExperience"
               type="number"
               min="0"
@@ -450,14 +450,12 @@ const ProfessionalInfoStep: React.FC = () => {
             )}
           </div>
 
-          <div className="form-control">
-            <label className="label" htmlFor="salaryExpectation">
-              <span className="label-text font-medium">
-                Salary Expectation (USD)
-              </span>
+          <div className="grid w-full max-w-sm items-center gap-1.5">
+            <Label className="label" htmlFor="salaryExpectation">
+              Salary Expectation (INR)
               <span className="label-text-alt text-red-500">*</span>
-            </label>
-            <input
+            </Label>
+            <Input
               id="salaryExpectation"
               type="number"
               min="0"

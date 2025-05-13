@@ -2,6 +2,8 @@ import React, { useCallback, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useDropzone } from "react-dropzone";
 import { type ApplicationFormData } from "../../schema";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
 
 // File type helpers
 const ACCEPTED_IMAGE_TYPES = [
@@ -136,10 +138,10 @@ const FileDropzone: React.FC<FileDropzoneProps> = ({
 
   return (
     <div className="form-control w-full">
-      <label className="label">
-        <span className="label-text font-medium">{label}</span>
+      <Label className="mb-2">
+        {label}
         {required && <span className="label-text-alt text-red-500">*</span>}
-      </label>
+      </Label>
 
       {!currentFile ? (
         // Dropzone UI when no file is selected
@@ -154,7 +156,7 @@ const FileDropzone: React.FC<FileDropzoneProps> = ({
             ${isDragActive ? "border-blue-500 bg-blue-50" : ""}
           `}
         >
-          <input {...getInputProps()} />
+          <Input {...getInputProps()} />
           <div className="flex flex-col items-center justify-center gap-2">
             <svg
               className="h-10 w-10 text-gray-400"

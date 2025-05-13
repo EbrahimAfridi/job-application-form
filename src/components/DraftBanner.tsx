@@ -64,7 +64,7 @@ const DraftBanner: React.FC<DraftBannerProps> = ({
           </Button>
         </div>
       </div>
-      <div className="mt-2 text-xs text-gray-500">
+      <div className="mt-4 text-xs text-gray-500">
         <p>
           Your draft is saved locally on this device. If you switch browsers or
           devices, you won't be able to access this draft.

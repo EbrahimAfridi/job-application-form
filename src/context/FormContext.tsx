@@ -93,6 +93,12 @@ export const FormContextProvider: React.FC<{ children: React.ReactNode }> = ({
   const saveDraft = () => {
     try {
       const formData = methods.getValues();
+      // Remove files before saving
+      if (formData.documents) {
+        formData.documents.resume = undefined;
+        formData.documents.profilePicture = undefined;
+        formData.documents.coverLetter = undefined;
+      }
       localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
       setIsDraftAvailable(true);
       return true;
@@ -109,19 +115,17 @@ export const FormContextProvider: React.FC<{ children: React.ReactNode }> = ({
       if (savedData) {
         const parsedData = JSON.parse(savedData);
 
-        // Handle Date objects which are serialized as strings
+        // Restore dates as before
         if (parsedData.personalInfo?.dateOfBirth) {
           parsedData.personalInfo.dateOfBirth = new Date(
             parsedData.personalInfo.dateOfBirth
           );
         }
-
         if (parsedData.additionalInfo?.availableStartDate) {
           parsedData.additionalInfo.availableStartDate = new Date(
             parsedData.additionalInfo.availableStartDate
           );
         }
-
         if (parsedData.professionalInfo?.experiences) {
           parsedData.professionalInfo.experiences =
             parsedData.professionalInfo.experiences.map((exp: any) => ({
@@ -129,6 +133,13 @@ export const FormContextProvider: React.FC<{ children: React.ReactNode }> = ({
               startDate: exp.startDate ? new Date(exp.startDate) : undefined,
               endDate: exp.endDate ? new Date(exp.endDate) : undefined,
             }));
+        }
+
+        // Ensure file fields are undefined
+        if (parsedData.documents) {
+          parsedData.documents.resume = undefined;
+          parsedData.documents.profilePicture = undefined;
+          parsedData.documents.coverLetter = undefined;
         }
 
         methods.reset(parsedData);
