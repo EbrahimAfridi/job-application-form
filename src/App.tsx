@@ -1,4 +1,5 @@
 import JobApplicationForm from "./components/JobApplicationForm";
+import "./index.css";
 
 
 const App = () => {

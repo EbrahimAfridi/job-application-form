@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "@/components/ui/button";
 
 interface DraftBannerProps {
   onLoad: () => void;
@@ -37,27 +38,30 @@ const DraftBanner: React.FC<DraftBannerProps> = ({
           </div>
         </div>
         <div className="flex space-x-2">
-          <button
+          <Button
+            variant={"outline"}
             type="button"
             onClick={onLoad}
-            className="inline-flex items-center px-3 py-1.5 border border-blue-600 text-xs font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            className="border-blue-300 text-xs text-blue-600 hover:bg-blue-50 hover:text-blue-700 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-blue-500"
           >
             Load Draft
-          </button>
-          <button
+          </Button>
+          <Button
+            variant={"outline"}
             type="button"
             onClick={onDismiss}
-            className="inline-flex items-center px-3 py-1.5 border border-gray-300 text-xs font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+            className="border border-gray-300 text-xs text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-gray-500"
           >
             Continue Without Draft
-          </button>
-          <button
+          </Button>
+          <Button
+            variant={"outline"}
             type="button"
             onClick={onClear}
-            className="inline-flex items-center px-3 py-1.5 border border-red-300 text-xs font-medium rounded-md text-red-700 bg-white hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+            className="border text-xs  border-red-300  text-red-700 bg-white hover:text-red-700 hover:bg-red-50 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-red-500"
           >
             Delete Draft
-          </button>
+          </Button>
         </div>
       </div>
       <div className="mt-2 text-xs text-gray-500">
